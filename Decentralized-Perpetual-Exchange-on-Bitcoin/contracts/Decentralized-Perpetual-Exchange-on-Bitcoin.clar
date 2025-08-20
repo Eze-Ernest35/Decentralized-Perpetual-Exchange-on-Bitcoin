@@ -367,3 +367,43 @@
     accumulated-yield: uint
   }
 )
+
+;; GOVERNANCE SYSTEM
+(define-map governance-proposals
+  { proposal-id: uint }
+  {
+    proposer: principal,
+    title: (string-ascii 100),
+    description: (string-ascii 500),
+    proposal-type: uint,
+    voting-start: uint,
+    voting-end: uint,
+    votes-for: uint,
+    votes-against: uint,
+    quorum-reached: bool,
+    executed: bool
+  }
+)
+
+(define-map governance-votes
+  { proposal-id: uint, voter: principal }
+  {
+    vote: bool, ;; true for yes, false for no
+    voting-power: uint,
+    timestamp: uint
+  }
+)
+
+;; PORTFOLIO ANALYTICS
+(define-map portfolio-metrics
+  { user: principal, period: uint } ;; period in days
+  {
+    total-pnl: int,
+    win-rate: uint,
+    sharpe-ratio: int,
+    max-drawdown: uint,
+    total-trades: uint,
+    avg-holding-period: uint,
+    risk-adjusted-return: int
+  }
+)
